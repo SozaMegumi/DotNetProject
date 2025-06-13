@@ -1,0 +1,24 @@
+﻿@model IEnumerable<DotNetProject.Models.TaskItem>
+
+<h2>To-Do List</h2>
+<a asp-action="Create" class="btn btn-primary">+ Add Task</a>
+<table class="table">
+    <thead>
+        <tr><th>Title</th><th>Due</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.DueDate.ToShortDateString()</td>
+                <td>@(item.IsCompleted ? "✅" : "❌")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">View</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
